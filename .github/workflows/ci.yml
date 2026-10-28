@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [ "typst-port", "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: '0.15.1'
+      - name: Compile sample
+        run: typst compile --root . sample/sample701.typ
